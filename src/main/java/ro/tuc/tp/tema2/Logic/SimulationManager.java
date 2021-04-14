@@ -1,18 +1,26 @@
-package ro.tuc.tp.tema2.DataModels;
+package ro.tuc.tp.tema2.Logic;
 
+import ro.tuc.tp.tema2.DataModels.Client;
+import ro.tuc.tp.tema2.DataModels.Coada;
+import ro.tuc.tp.tema2.DataModels.Scheduler;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.*;
 
 public class SimulationManager implements Runnable{
-    public int timeLimit=60;
-    public int maxProcessingTime=30;
-    public int minProcessingTime=2;
+    public int timeLimit=20;
+    public int maxProcessingTime=5;
+    public int minProcessingTime=3;
     public int numarDeCozi=2;
-    public int numarDeClienti=4;
-    public int maxSos=30;
-    public int minSos=2;
+    public int numarDeClienti=10;
+    public int maxSos=3;
+    public int minSos=1;
     public SelectionPolicy selectionPolicy=SelectionPolicy.SHORTEST_TIME;
     private Scheduler scheduler;
     private List<Client> clientiGenerati=new ArrayList<>();
@@ -41,8 +49,17 @@ public class SimulationManager implements Runnable{
     public void run()
     {
         int currentTime=0;
+        File fileOutput=new File("iesire.txt");
+        FileWriter write= null;
+        try {
+            write = new FileWriter(fileOutput);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PrintWriter pw=new PrintWriter(write);
         while(currentTime<timeLimit)
         {
+            pw.println("-----Time: "+currentTime+"-----");
             System.out.println("-----Time: "+currentTime+"-----");
             ArrayList<Client> clientiStersi=new ArrayList<Client>();
             for (Client c: clientiGenerati)
@@ -56,14 +73,18 @@ public class SimulationManager implements Runnable{
             for (Client c: clientiStersi){
                 clientiGenerati.remove(c);
             }
+            pw.println("Clienti: ");
             System.out.print("Clienti: ");
             for (Client c: clientiGenerati)
             {
+                pw.println(c.toString());
                 System.out.print(c.toString());
             }
+            pw.println();
             System.out.println();
             for (Coada c: scheduler.getCozi())
             {
+                pw.println(c.toString());
                 System.out.println(c.toString());
             }
             currentTime++;
@@ -73,6 +94,7 @@ public class SimulationManager implements Runnable{
                 e.printStackTrace();
             }
         }
+        pw.close();
 
     }
 

@@ -1,5 +1,10 @@
 package ro.tuc.tp.tema2.DataModels;
 
+import ro.tuc.tp.tema2.Logic.SelectionPolicy;
+import ro.tuc.tp.tema2.Logic.StrategieCoada;
+import ro.tuc.tp.tema2.Logic.StrategieTimp;
+import ro.tuc.tp.tema2.Logic.Strategy;
+
 import java.util.ArrayList;
 import java.util.List;
 

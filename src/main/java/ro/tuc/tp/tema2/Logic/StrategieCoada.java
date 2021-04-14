@@ -1,4 +1,8 @@
-package ro.tuc.tp.tema2.DataModels;
+package ro.tuc.tp.tema2.Logic;
+
+import ro.tuc.tp.tema2.DataModels.Client;
+import ro.tuc.tp.tema2.DataModels.Coada;
+import ro.tuc.tp.tema2.Logic.Strategy;
 
 import java.util.List;
 
